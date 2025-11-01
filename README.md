@@ -21,6 +21,6 @@ idUsuario;timestamp;br;km;tipoAlerta
 - Compile o código-fonte C (ex: usando GCC ou CodeBlocks).
 - Execute o programa e utilize e siga as instruções do menu.
 
-#AUTORES
+# AUTORES
 - [Yan Neves](https://github.com/yan-dhsk)
 - [Vinicius Meneses](https://github.com/viniciusmeneses-maker)
