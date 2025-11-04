@@ -61,7 +61,7 @@ fclose(carregado);
 void processarArquivo (Estrada **estradasPonteiro, Estrada *estradas, int br, float trechoDaBr, char tipo) {
 int controle = 0;
 Estrada *copia = estradas;
-Trecho *copia2 = copia->inicioTrecho;
+if (copia != NULL) {Trecho *copia2 = copia->inicioTrecho; Trecho *copia3;
 while (copia != NULL){
     if (br == copia->br){
         while(copia2 != NULL){
@@ -69,27 +69,38 @@ while (copia != NULL){
                 copia2->upvotes++;
                 break;
             }
-            copia2 = copia2->proximo;
+            if (copia2->proximo == NULL){
+                copia3 = copia2;
+            }
+            copia2 = copia2->proximo;}
         if (copia2 == NULL){
             Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
-            copia2->proximo = noTrecho;
+            copia3->proximo = noTrecho;
             noTrecho->tipo = tipo;
             noTrecho->trechoDaBr = trechoDaBr;
             noTrecho->upvotes = 1;
             noTrecho->proximo = NULL;
         }
-        }
     }
     copia = copia->proximo;
+    if (copia !=NULL) {
     copia2 = copia->inicioTrecho;
-    }
+    }}}
 if (*estradasPonteiro == NULL){controle++;}
-else if (copia->proximo == NULL || *estradasPonteiro != NULL){controle = 2;}
+else if (copia != NULL && copia->proximo == NULL){controle = 2;}
 if (controle != 0) {
     Estrada *noBR = (Estrada*) malloc(sizeof(Estrada));
+    if (noBR == NULL) {
+        printf("Erro");
+        return;
+    }
     noBR->br = br;
     noBR->proximo = NULL;
     Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
+    if (noTrecho == NULL) {
+        printf("Erro");
+        return;
+    }
     noBR->inicioTrecho = noTrecho;
     noTrecho->tipo = tipo;
     noTrecho->trechoDaBr = trechoDaBr;
@@ -97,8 +108,9 @@ if (controle != 0) {
     if (controle == 1){
     *estradasPonteiro = noBR;
     } else {
+    if (copia != NULL){
     copia->proximo = noBR;
-    }
+    }}
     return;
 }
 }
@@ -116,20 +128,60 @@ int br, upvotes;
 float trecho;
 char tipo;
 Estrada *copia = dados;
-while (fscanf(consolidado, "%d;%d;%c;%f", &br, &trecho, &tipo, &upvotes) == 4){
+while (fscanf(consolidado, "%d;%f;%c;%d", &br, &trecho, &tipo, &upvotes) == 4){
 if (controle == 0){
     controle++;
     continue;
 }
-if (dados == NULL || copia->br != br){
+int controle2 = 0;
+if (dados == NULL){
+    controle2 = 1;
+}
+if (controle2 == 0){
+while(1){
+if (copia->br == br){
+    controle2 = 3;
+    break;
+}
+else if (copia->proximo == NULL){
+    controle2 = 2;
+    break;
+}
+copia = copia->proximo;
+
+}}
+else{
+if (controle2 == 1 || controle2 == 2){
 Estrada *noBR = (Estrada*) malloc(sizeof(Estrada));
 noBR->br = br;
 noBR->proximo = NULL;
 Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
 noBR->inicioTrecho = noTrecho;
 noTrecho->trechoDaBr = trecho;
+noTrecho->upvotes = upvotes;
+noTrecho->proximo = NULL;
+if (controle2 == 1){
+dados = noBR;
+copia = dados;
 }
-copia = copia->proximo;
+else if (controle2 == 2){
+    copia->proximo = noBR;
+    copia = dados;
+}
+else {
+Trecho *trecho2 = copia->inicioTrecho;
+while(1){
+    if (trecho2->proximo == NULL){
+        Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
+        noTrecho->trechoDaBr = trecho;
+        noTrecho->upvotes = upvotes;
+        noTrecho->proximo = NULL;
+        trecho2->proximo = noTrecho;
+    }
+    trecho2 = trecho2->proximo;
+}
+}}
+}
 }
 }
 
@@ -143,7 +195,7 @@ Estrada *copia = estrada;
 Trecho *copia2 = copia->inicioTrecho;
 fprintf(salvo, "br;trecho;tipo;upvotes");
 while (copia->inicioTrecho != NULL){
-    fprintf(salvo, "%d;%d;%c;%d\n", copia->br, copia2->trechoDaBr, copia2->tipo, copia2->upvotes);
+    fprintf(salvo, "%d;%f;%c;%d\n", copia->br, copia2->trechoDaBr, copia2->tipo, copia2->upvotes);
     copia2 = copia2->proximo;
     copia = copia->proximo;
 }
