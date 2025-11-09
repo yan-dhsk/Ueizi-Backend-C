@@ -1,4 +1,4 @@
-te#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -42,4 +42,5 @@ printf("Digite a BR e o trecho especifico da br (Ex: 102(BR) 150(Inicio do trech
 scanf("%d %f %f", &br, &trecho1, &trecho2);
 criararquivo();
 ler(nomearquivo, br, trecho1, trecho2);}
+
 
