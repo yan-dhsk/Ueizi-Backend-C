@@ -28,15 +28,14 @@ char tipo, tipoAnterior;
 fscanf(dados, "%*[^\n]\n");
 fprintf(alertas, "br;tipoAlerta;quantidade\n");
 
-while(fscanf(dados, "%d;%*f;%c;%d\n", &br, &tipo, &numAlertas)==3){
+while(fscanf(dados, "%d;%*f;%c;%d\n", &br, &tipo, &numAlertas)==3){ printf("%d - %c - %d  ;  ", br, tipo, numAlertas);
     if(br==brAnterior){
         tipagem(tipoAnterior, upvotes,numAlertasAnteriores);}
-    else if(br!=0){
+    else if(brAnterior!=0){
         tipagem(tipoAnterior, upvotes,numAlertasAnteriores);
         for(int x=0;x<6;x++){
             fprintf(alertas, "%d,%c,%d\n", brAnterior, upvotes[x+6], upvotes[x]);}
-        int upvotes[]={0,0,0,0,0,0,65,66,67,68,69,70};
-    }
+        int upvotes[]={0,0,0,0,0,0,65,66,67,68,69,70};}
 
     brAnterior=br;
     tipoAnterior=tipo;
@@ -50,8 +49,11 @@ fclose(dados);
 fclose(alertas);
 }
 
+
+
 int main(){
 
 char nomeArquivo[]="dadosConsolidados.csv";
 
-lerBrs(nomeArquivo);}
+lerBrs(nomeArquivo);
+}
