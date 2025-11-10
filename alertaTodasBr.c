@@ -49,11 +49,8 @@ fclose(dados);
 fclose(alertas);
 }
 
-
-
 int main(){
 
 char nomeArquivo[]="dadosConsolidados.csv";
 
-lerBrs(nomeArquivo);
-}
+lerBrs(nomeArquivo);}
