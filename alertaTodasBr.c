@@ -14,7 +14,6 @@ case 'E':upvotes[4]+=numAlertas;break;
 case 'F':upvotes[5]+=numAlertas;break;}
 }
 
-
 void lerBrs(char nomeArquivo[]){
 
 FILE *dados=fopen(nomeArquivo,"r");
@@ -29,7 +28,7 @@ char tipo, tipoAnterior;
 fscanf(dados, "%*[^\n]\n");
 fprintf(alertas, "br;tipoAlerta;quantidade\n");
 
-while(fscanf(dados, "%d;%*f;%c;%d\n", &br, &tipo, &numAlertas)==3){ printf("%d - %c - %d  ;  ", br, tipo, numAlertas);
+while(fscanf(dados, "%d;%*f;%c;%d\n", &br, &tipo, &numAlertas)==3){
     if(br==brAnterior){
         tipagem(tipoAnterior, upvotes,numAlertasAnteriores);}
     else if(br!=0){
@@ -51,11 +50,8 @@ fclose(dados);
 fclose(alertas);
 }
 
-
-
 int main(){
 
 char nomeArquivo[]="dadosConsolidados.csv";
 
-lerBrs(nomeArquivo);
-}
+lerBrs(nomeArquivo);}
