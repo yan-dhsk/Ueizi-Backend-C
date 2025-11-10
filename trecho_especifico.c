@@ -32,3 +32,5 @@ char nomearquivo[]="dadosConsolidados.csv";
 printf("Digite a BR e o trecho especifico da br (Ex: 102(BR) 150(Inicio do trecho) 170(final do trecho))\n");
 scanf("%d %f %f", &br, &trecho1, &trecho2);
 ler(nomearquivo, br, trecho1, trecho2);}
+
+
