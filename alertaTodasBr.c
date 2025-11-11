@@ -35,7 +35,7 @@ while(fscanf(dados, "%d;%*f;%c;%d\n", &br, &tipo, &numAlertas)==3){
         tipagem(tipoAnterior, upvotes,numAlertasAnteriores);
         for(int x=0;x<6;x++){
             fprintf(alertas, "%d,%c,%d\n", brAnterior, upvotes[x+6], upvotes[x]);}
-        int upvotes[]={0,0,0,0,0,0,65,66,67,68,69,70};}
+        for(int x=0;x<6;x++){upvotes[x]=0;}}
 
     brAnterior=br;
     tipoAnterior=tipo;
